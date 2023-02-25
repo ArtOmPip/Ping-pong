@@ -43,6 +43,12 @@ racket2 = Player('racket.png', 0, 300, 10)
 
 ball = GameSprite('tenis_ball.png', 300, 250, 5)
 
+font.init()
+font1 = font.Font(None, 35)
+lose1 =  font1.render('PLAYER 1 LOSE', True, (180, 0, 0))
+font2 = font.Font(None, 35)
+lose2 =  font1.render('PLAYER 2 LOSE', True, (180, 0, 0))
+
 speed_x = 3
 speed_y = 3
 
@@ -50,6 +56,13 @@ while game:
     for e in event.get():
         if e.type == QUIT:
             game = False
+
+    if ball.rect.x < 0:
+        finish =True
+        window.blit(lose1, (200, 200))
+    if ball.rect.x > 600:
+        finish =True
+        window.blit(lose2, (200, 200))
 
     if finish != True:
         ball.rect.x += speed_x
